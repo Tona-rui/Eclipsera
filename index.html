@@ -5,6 +5,8 @@
   <title>Eclipsera Album Showcase</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+
 </head>
 <body>
 <div id="site-loader"></div>
@@ -125,9 +127,12 @@
 
           <div class="comment-footer">
             <div class="comment-player">
-                <button class="c-btn prev">⏮</button>
-                <button class="c-btn play">▶</button>
-                <button class="c-btn next">⏭</button>
+                <button class="c-btn prev" aria-label="Previous"></button>
+                <button class="c-btn play">
+                  <span class="material-symbols-rounded">play_arrow</span>
+                </button>
+                <button class="c-btn next" aria-label="Next"></button>
+
                 <div class="volume-wrapper">
                   <div class="volume-icon"></div>
                   <input type="range" class="volume-slider" min="0" max="100" value="50">

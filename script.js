@@ -173,7 +173,6 @@ function playTrack(i) {
 
 
   audioCtx.resume();
-  playBtn.textContent = "⏸";
 
   // 코멘트 업데이트
   const c = comments[i];
@@ -203,8 +202,8 @@ allTracks.forEach((item, index) => {
 });
 
 
-
-/* === 재생/정지 === */
+const playIcon = playBtn.querySelector('.material-symbols-rounded');
+/* === 재생 / 정지 === */
 playBtn.addEventListener("click", () => {
   if (!audio.src) return;
 
@@ -212,13 +211,16 @@ playBtn.addEventListener("click", () => {
     audio.volume = 0;
     audio.play();
     fadeAudio(targetVolume, FADE_IN_TIME);
-    playBtn.textContent = "⏸";
+
+    playBtn.classList.add("playing");
+    playIcon.textContent = "pause"; 
   } else {
     pauseWithFade();
-    playBtn.textContent = "▶";
+
+    playBtn.classList.remove("playing");
+    playIcon.textContent = "play_arrow";
   }
 });
-
 
 
 audio.addEventListener("play", () => {
@@ -255,16 +257,71 @@ function updateVolumeIcon(volume) {
   }
 }
 
+function setDiscUI(disc) {
+  document.querySelectorAll(".disc-btn")
+    .forEach(b => b.classList.toggle("active", b.dataset.disc === String(disc)));
+
+  document.querySelectorAll(".disc-panel")
+    .forEach(p => p.classList.toggle("hidden", p.dataset.disc !== String(disc)));
+
+  discDescription.textContent = descriptions[disc];
+}
 
 /* === 이전/다음곡 === */
 prevBtn.addEventListener("click", () => {
-  currentIndex = (currentIndex - 1 + trackList.length) % trackList.length;
-  playTrack(currentIndex);
+  const cur = trackList[currentIndex];
+
+  // 🟣 Disc 2 첫 곡 → Disc 1 마지막 곡
+  if (cur.disc === 2 && cur.index === 0) {
+    setDiscUI(1);
+
+    const idx = trackList.findIndex(t =>
+      t.disc === 1 && t.index === 2
+    );
+    playTrack(idx);
+    return;
+  }
+
+  // 🟢 같은 Disc 이전 곡
+  const prevIndex = trackList.findIndex(t =>
+    t.disc === cur.disc && t.index === cur.index - 1
+  );
+
+  if (prevIndex !== -1) {
+    playTrack(prevIndex);
+  }
 });
+
 nextBtn.addEventListener("click", () => {
-  currentIndex = (currentIndex + 1) % trackList.length;
-  playTrack(currentIndex);
+  const cur = trackList[currentIndex];
+
+  // 🔴 Disc 2 마지막 → 완전 중지
+  if (cur.disc === 2 && cur.index === 2) {
+    stopPlaybackCompletely();
+    return;
+  }
+
+  // 🟣 Disc 1 마지막 → Disc 2 첫 곡
+  if (cur.disc === 1 && cur.index === 2) {
+    setDiscUI(2);
+
+    const idx = trackList.findIndex(t =>
+      t.disc === 2 && t.index === 0
+    );
+    playTrack(idx);
+    return;
+  }
+
+  // 🟢 같은 Disc 다음 곡
+  const nextIndex = trackList.findIndex(t =>
+    t.disc === cur.disc && t.index === cur.index + 1
+  );
+
+  if (nextIndex !== -1) {
+    playTrack(nextIndex);
+  }
 });
+
 
 const seekBar = document.getElementById("seekBar");
 const currentTimeEl = document.getElementById("currentTime");
@@ -325,7 +382,6 @@ function switchToDisc2AndPlay() {
 function stopPlaybackCompletely() {
   pauseWithFade();
   audio.currentTime = 0;
-  playBtn.textContent = "▶";
 
   // active 트랙 표시 제거
   document.querySelectorAll(".track-item")

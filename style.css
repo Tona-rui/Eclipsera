@@ -643,6 +643,10 @@ body {
 
 /* 버튼 */
 .c-btn {
+  font-size: 24px;          /* ← 문자 렌더링 완전 차단 */
+  line-height: 1;
+  overflow: hidden;
+  color: #fff;    
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -650,47 +654,40 @@ body {
   background: transparent;
   border: none;
 
-  color: rgba(255,255,255,0.85);
-  font-size: 22px;
+  cursor: pointer;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  cursor: pointer;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease;
+  transition: background 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
 }
-
-
-
 .c-btn:hover {
   background: rgba(255,255,255,0.18);
-  color: #ffffff;
 }
-
 .c-btn:active {
   background: rgba(255,255,255,0.28);
 }
-
-.c-btn.play {
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.c-btn.prev::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid rgba(255,255,255,0.9);
+  border-left: 2px solid rgba(255,255,255,0.9);
+  transform: rotate(-45deg);
+}
+.c-btn.next::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid rgba(255,255,255,0.9);
+  border-right: 2px solid rgba(255,255,255,0.9);
+  transform: rotate(45deg);
 }
 
-.play-icon {
-  width: 24px;
-  height: 24px;
-  background: url("assets/icons/play.svg") center / contain no-repeat;
-}
 
-.c-btn.play.playing .play-icon {
-  background-image: url("assets/icons/pause.svg");
-}
 
 
 /* 볼륨바 */
