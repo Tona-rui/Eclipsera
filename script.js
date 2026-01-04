@@ -1,18 +1,10 @@
+const loader = document.getElementById("site-loader");
 
-window.addEventListener("load", () => {
-  const loader = document.getElementById("site-loader");
+let bgReady = false;
+let depthReady = false;
+let firstFrameRendered = false;
 
-  // 블러 제거
-  setTimeout(() => {
-    loader.classList.add("hide");
-  }, 200);
 
-  // 콘텐츠 등장
-  setTimeout(() => {
-    document.querySelectorAll(".page, .glass-card, .tracklist-card, .comment-card")
-      .forEach(el => el.classList.add("loaded"));
-  }, 350); // 살짝 늦게 등장해야 부드럽다
-});
 
 
 // ----------------------------------------------------
@@ -553,6 +545,7 @@ window.addEventListener("resize", resizeRenderCanvas);
 // ---------------------------------------------
 // 🔥 depth-map 로드 후 픽셀 추출
 // ---------------------------------------------
+
 depthImg.onload = () => {
   const tempC = document.createElement("canvas");
   const tctx = tempC.getContext("2d");
@@ -567,16 +560,23 @@ depthImg.onload = () => {
 
   const d = tctx.getImageData(0, 0, depthW, depthH);
   depthData = d.data;
-
-  if (bg.complete) startDepthParallax(); // 둘 다 로드되면 실행
+  depthReady = true;
+  tryStartRender();
 };
 
 // ---------------------------------------------
 // 🔥 원본 배경 로드 후 실행
 // ---------------------------------------------
 bg.onload = () => {
-  if (depthData) startDepthParallax(); // 둘 다 로드되면 실행
+  bgReady = true;
+  tryStartRender();
 };
+
+function tryStartRender() {
+  if (bgReady && depthReady) {
+    startDepthParallax();
+  }
+}
 
 // ---------------------------------------------
 // 🔥 depth 기반 패럴랙스 렌더링
@@ -594,7 +594,16 @@ function startDepthParallax() {
   });
 
   function render() {
+    if (!firstFrameRendered) {
+    firstFrameRendered = true;
 
+    // 로딩 제거
+    loader.classList.add("hide");
+
+    // 콘텐츠 등장
+    document.querySelectorAll(".page, .glass-card, .tracklist-card, .comment-card")
+      .forEach(el => el.classList.add("loaded"));
+  }
     const w = renderCanvas.width;
     const h = renderCanvas.height;
 
