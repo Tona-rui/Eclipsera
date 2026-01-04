@@ -222,11 +222,13 @@ playBtn.addEventListener("click", () => {
 
 
 audio.addEventListener("play", () => {
-    isPlaying = true;
+  playBtn.classList.add("playing");
 });
+
 audio.addEventListener("pause", () => {
-    isPlaying = false;
+  playBtn.classList.remove("playing");
 });
+
 
 
 /* === 볼륨 조절 === */

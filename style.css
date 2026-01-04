@@ -45,6 +45,7 @@
   opacity: 0;
   transform: translateY(35px);
   transition: opacity 0.9s ease, transform 0.9s cubic-bezier(.22, .61, .36, 1);
+  position: relative;
 }
 
 .page.loaded,
@@ -123,7 +124,8 @@ body {
   min-height: 100svh;   
   height: auto;
 
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
 
   display: flex;
   flex-direction: column;
@@ -672,6 +674,24 @@ body {
   background: rgba(255,255,255,0.28);
 }
 
+.c-btn.play {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-icon {
+  width: 24px;
+  height: 24px;
+  background: url("assets/icons/play.svg") center / contain no-repeat;
+}
+
+.c-btn.play.playing .play-icon {
+  background-image: url("assets/icons/pause.svg");
+}
+
 
 /* 볼륨바 */
 .volume-wrapper {
@@ -984,6 +1004,35 @@ body {
 
 /* 모바일 환경 */
 @media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  body::before {
+    content: "";
+    position: fixed;
+    inset: -20%;
+    pointer-events: none;
+    z-index: -4;
+
+    background:
+      radial-gradient(
+        circle at 50% 45%,
+        rgba(255,255,255,0.55),
+        rgba(255,255,255,0.25) 22%,
+        rgba(255,255,255,0.12) 34%,
+        transparent 55%
+      );
+
+    filter: blur(18px);
+  }
+
+  #bgCanvas,
+  #cornerFxCanvas {
+    opacity: 0.45;
+  }
 
   .page {
     justify-content: center;
@@ -1002,11 +1051,7 @@ body {
 
   .tracklist-card {
     max-height: none;
-    min-height: 400px;
-    padding-bottom: 20px;
   }
-
-
 
   .track-item {
     margin: 6px 0;
@@ -1018,7 +1063,6 @@ body {
     flex: none;
     width: 100%;
     max-width: 100%;
-    padding: 26px 30px;
     min-height: 360px;
   }
   .comment-footer {
@@ -1038,11 +1082,16 @@ body {
   .t-composer {
     font-size: 12px;
   }
-  .comment-header h3 {
-    font-size: 22px;
-  }
+  .glass-card p,
   .comment-card p {
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .glass-card h2,
+  .glass-card h3 {
+    line-height: 1.25;
+    margin-bottom: 8px;
   }
 
   /* 재생 버튼 크기 축소 */
@@ -1087,12 +1136,121 @@ body {
     padding: 14px 26px;
     font-size: 16px;
   }
+  .comment-header h3 {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .glass-card,
+  .tracklist-card,
+  .comment-card {
+    width: 92vw;
+    max-width: 92vw;
+    padding: 14px 14px;
+    border-radius: 18px;
+  }
 
   .side-arrow {
     display: none;
   }
 
 }
+
+@media (max-width: 375px) and (max-height: 700px) {
+  html, body {
+    height: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .page[data-page="0"] {
+    justify-content: flex-start;
+    padding-top: 32px;
+  }
+
+  .page[data-page="1"] {
+    justify-content: flex-start;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    padding-top: 24px;
+    padding-bottom: 150px; /* bottom-nav + 여유 */
+  }
+
+  .page[data-page="2"] {
+    justify-content: flex-start;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 32px;
+    padding-bottom: 140px; /* bottom-nav 공간 */
+  }
+  
+  .tracks-page {
+    justify-content: flex-start;
+  }
+
+  .track-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+
+    height: auto;
+    min-height: unset;
+    padding-bottom: 0;
+  }
+
+  /* 카드 간 여백 늘려서 숨통 트기 */
+  .tracklist-card,
+  .comment-card {
+    margin-bottom: 18px;
+  }
+
+  .comment-card {
+    min-height: unset;      /* 고정 높이 제거 */
+    height: auto;
+    padding-bottom: 32px;  /* 내부 여유 */
+  }
+
+  .comment-footer {
+    margin-top: 12px;
+  }
+
+  .seek-container {
+    margin-bottom: 12px;
+  } .credits-page {
+    overflow-y: auto;
+    justify-content: flex-start;
+  }
+
+  .credits-card {
+    width: 92vw;
+    max-width: 92vw;
+    padding: 24px 20px;
+  }
+
+  .credit-item {
+    font-size: 15px;
+  }
+
+  .credits-title {
+    font-size: 24px;
+  }
+
+  
+}
+
+
+@media (min-width: 900px) and (max-height: 700px) and (hover: none) {
+  .page {
+    justify-content: center;
+    overflow: hidden;
+  }
+  .credits-card {
+    max-height: 520px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 
 
 
