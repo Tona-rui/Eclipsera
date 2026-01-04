@@ -1,0 +1,16 @@
+{
+"name": "music-landing-tailwind-responsive",
+"version": "1.0.0",
+"private": true,
+"scripts": {
+"dev": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch",
+"build": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify && cp src/index.html dist/index.html && cp -r src/assets dist/assets",
+"serve": "npx serve dist"
+},
+"devDependencies": {
+"autoprefixer": "^10.4.14",
+"postcss": "^8.4.24",
+"tailwindcss": "^3.5.0",
+"serve": "^14.2.0"
+}
+}

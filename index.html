@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Eclipsera Album Showcase</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="site-loader"></div>
+
+<canvas id="bgCanvas"></canvas>
+<canvas id="cornerFxCanvas"></canvas>
+
+
+<main id="viewport">
+  <button class="side-arrow left" aria-label="Previous"></button>
+  <button class="side-arrow right" aria-label="Next"></button>
+
+  <div id="slider">
+
+    <!-- ============ 1) Overview ============ -->
+    <section class="page" data-page="0">
+      <div class="glass-card center">
+        <img src="assets/circle-logo.jfif" class="album-cover">
+        <h1 class="album-title">Eclipsera</h1>
+        <p class="album-sub">Free EDM Compilation Album</p>
+        <a href="assets/Eclipsera.zip" class="download-btn" download>
+          <span class="dl-icon"></span>
+          Download
+        </a>
+      </div>
+    </section>
+
+
+    <!-- ============ 2) Tracks ============ -->
+    <section class="page" data-page="1">
+
+      <div class="track-section">
+
+        <!-- LEFT -->
+        <div class="tracklist-card">
+
+          <div class="disc-tabs">
+            <button class="disc-btn active" data-disc="1">Disc 1</button>
+            <button class="disc-btn" data-disc="2">Disc 2</button>
+          </div>
+
+          <div class="tracklist-inner">
+
+            <!-- Disc 1 -->
+            <div class="disc-panel" data-disc="1">
+              <div class="track-item" data-track="0">
+                <div class="track-text">
+                  <span class="t-name">Solenyx</span>
+                  <span class="t-composer">Tonarui</span>
+                </div>
+                <span class="t-time">5:52</span>
+              </div>
+
+              <div class="track-item" data-track="1">
+                <div class="track-text">
+                  <span class="t-name">읔브님 제목미정곡</span>
+                  <span class="t-composer">읔브</span>
+                </div>
+                <span class="t-time">?:??</span>
+              </div>
+
+              <div class="track-item" data-track="2">
+                <div class="track-text">
+                  <span class="t-name">pluto</span>
+                  <span class="t-composer">prsgt</span>
+                </div>
+                <span class="t-time">4:05</span>
+              </div>
+
+            </div>
+
+            <!-- Disc 2 -->
+            <div class="disc-panel hidden" data-disc="2">
+              <div class="track-item" data-track="0">
+                <div class="track-text">
+                  <span class="t-name">Open Portal</span>
+                  <span class="t-composer">Tonarui</span>
+                </div>
+                <span class="t-time">4:00</span>
+              </div>
+
+              <div class="track-item" data-track="1">
+                <div class="track-text">
+                  <span class="t-name">Alertavoid - 읔브</span>
+                  <span class="t-composer">읔브</span>
+                </div>
+                <span class="t-time">4:34</span>
+              </div>
+
+              <div class="track-item" data-track="2">
+                <div class="track-text">
+                  <span class="t-name">ujumia</span>
+                  <span class="t-composer">prsgt</span>
+                </div>
+                <span class="t-time">4:05</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="disc-description">
+            Disc 1은 작곡가가 가장 자신 있는 스타일,  
+            평소 만드는 장르의 곡들로 구성되었습니다.
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="comment-card">
+
+          <div class="comment-header">
+            <h3 id="comment-title">Select a Track</h3>
+            <div class="comment-underline"></div>
+          </div>
+
+          <p id="comment-body">
+          </p>
+
+          <div class="comment-footer">
+            <div class="comment-player">
+                <button class="c-btn prev">⏮</button>
+                <button class="c-btn play">▶</button>
+                <button class="c-btn next">⏭</button>
+                <div class="volume-wrapper">
+                  <div class="volume-icon"></div>
+                  <input type="range" class="volume-slider" min="0" max="100" value="50">
+                </div>
+
+            </div>
+
+            <canvas id="visualizer" width="240" height="60"></canvas>
+            </div>
+
+            <div class="seek-container">
+            <input type="range" id="seekBar" min="0" max="100" value="0">
+            <div class="time-info">
+                <span id="currentTime">0:00</span>
+                <span id="totalTime">0:00</span>
+            </div>
+            </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+  <!-- ============ 3) Credits ============ -->
+  <section class="page" data-page="2">
+    <div class="glass-card credits-card">
+
+      <h2 class="credits-title">Credits</h2>
+
+      <!-- Composers -->
+      <h3 class="credit-section-title">Composers</h3>
+      <div class="credit-item">
+        <span class="name">Tonarui</span>
+        <a href="https://x.com/tonarui" target="_blank" class="x-link"></a>
+      </div>
+      <div class="credit-item">
+        <span class="name">읔브</span>
+        <a href="https://x.com/plutomusic" target="_blank" class="x-link"></a>
+      </div>
+      <div class="credit-item">
+        <span class="name">prsgt</span>
+        <a href=" https://x.com/prsamgate" target="_blank" class="x-link"></a>
+      </div>
+
+      <!-- Mastering -->
+      <h3 class="credit-section-title">Mastering</h3>
+      <div class="credit-item">
+        <span class="name">Tonarui (Basic Leveling Only)</span>
+      </div>
+
+      <!-- Artwork -->
+      <h3 class="credit-section-title">Artwork</h3>
+      <div class="credit-item">
+        <span class="name">Tonarui</span>
+      </div>
+      <div class="credit-item">
+        <span class="name">R=DY(Logo)</span>
+        <a href=" https://x.com/redybil" target="_blank" class="x-link"></a>
+      </div>
+
+      <!-- Website -->
+      <h3 class="credit-section-title">Web</h3>
+      <div class="credit-item">
+        <span class="name">Tonarui</span>
+      </div>
+
+    </div>
+  </section>
+
+  </div>
+</main>
+
+<footer class="bottom-nav">
+  <button class="nav-btn active" data-page="0">Overview</button>
+  <button class="nav-btn" data-page="1">Tracks</button>
+  <button class="nav-btn" data-page="2">Credits</button>
+</footer>
+
+<div class="noise-layer"></div>
+<div class="bloom-layer"></div>
+<div class="light-beams"></div>
+<div class="blur-mask"></div>
+<div class="mist-layer"></div>
+<div class="particle-layer"></div>
+
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
