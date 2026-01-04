@@ -52,7 +52,7 @@ const trackList = [
   // Disc 1
   { disc: 1, index: 0, title: "Solenyx", file: "Solenyx.mp3" },
   { disc: 1, index: 1, title: "Track2", file: "track2.mp3" },
-  { disc: 1, index: 2, title: "pluto", file: "pluto.wav" },
+  { disc: 1, index: 2, title: "pluto", file: "pluto.mp3" },
 
   // Disc 2
   { disc: 2, index: 0, title: "Open Portal", file: "Open Portal.mp3" },
@@ -504,8 +504,6 @@ depthImg.onload = () => {
 
   const d = tctx.getImageData(0, 0, depthW, depthH);
   depthData = d.data;
-
-  console.log("Depth map loaded:", depthW, depthH);
 
   if (bg.complete) startDepthParallax(); // 둘 다 로드되면 실행
 };
