@@ -171,8 +171,10 @@ function playTrack(i) {
   audio.play();
   fadeAudio(targetVolume, FADE_IN_TIME);
 
-
   audioCtx.resume();
+
+  playBtn.classList.add("playing");
+  updatePlayIcon(true); 
 
   // 코멘트 업데이트
   const c = comments[i];
@@ -181,11 +183,14 @@ function playTrack(i) {
     document.getElementById("comment-body").textContent = c.body;
   }
 
-  // 전체 길이 표시가 필요하면
   audio.onloadedmetadata = () => {
     document.getElementById("totalTime").textContent =
       formatTime(audio.duration);
   };
+}
+
+function updatePlayIcon(isPlaying) {
+  playIcon.textContent = isPlaying ? "pause" : "play_arrow";
 }
 
 
