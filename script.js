@@ -996,8 +996,9 @@ function renderCircuits() {
       const d = distToSegment(px, py, x1, y1, x2, y2);
 
       if (d < 50) {
-        c.energy[j] = 1;
+        c.energy[j] += (1 - c.energy[j]) * 0.35;
       }
+
     }
 
     // 🔹 에너지 기반 렌더
