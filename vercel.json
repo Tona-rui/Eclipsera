@@ -2,12 +2,15 @@
   "trailingSlash": true,
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/eclipsera/index.html"
-    },
-    {
       "source": "/eclipsera",
       "destination": "/eclipsera/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/eclipsera/",
+      "permanent": true
     }
   ]
 }
