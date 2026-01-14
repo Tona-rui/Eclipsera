@@ -1,12 +1,10 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": true,
   "rewrites": [
     {
       "source": "/eclipsera",
       "destination": "/eclipsera/index.html"
-    },
-    {
-      "source": "/eclipsera/:path*",
-      "destination": "/eclipsera/:path*"
     }
   ]
 }
