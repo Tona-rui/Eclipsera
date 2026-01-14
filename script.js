@@ -43,7 +43,7 @@ let currentIndex = 0;
 const trackList = [
   // Disc 1
   { disc: 1, index: 0, title: "Solenyx", file: "Solenyx.mp3" },
-  { disc: 1, index: 1, title: "Track2", file: "track2.mp3" },
+  { disc: 1, index: 1, title: "Revolve", file: "Revolve.mp3" },
   { disc: 1, index: 2, title: "pluto", file: "pluto.mp3" },
 
   // Disc 2
@@ -245,7 +245,7 @@ function updateVolumeIcon(volume) {
   if (volume === 0) {
     icon.style.maskImage = "url('assets/icons/volume-off.svg')";
     icon.style.webkitMaskImage = "url('assets/icons/volume-off.svg')";
-  } else if (volume < 0.6) {
+  } else if (volume < 0.7) {
     icon.style.maskImage = "url('assets/icons/volume-mid.svg')";
     icon.style.webkitMaskImage = "url('assets/icons/volume-mid.svg')";
   } else {
@@ -268,7 +268,7 @@ function setDiscUI(disc) {
 prevBtn.addEventListener("click", () => {
   const cur = trackList[currentIndex];
 
-  // 🟣 Disc 2 첫 곡 → Disc 1 마지막 곡
+  //  Disc 2 첫 곡 → Disc 1 마지막 곡
   if (cur.disc === 2 && cur.index === 0) {
     setDiscUI(1);
 
@@ -279,7 +279,7 @@ prevBtn.addEventListener("click", () => {
     return;
   }
 
-  // 🟢 같은 Disc 이전 곡
+  //  같은 Disc 이전 곡
   const prevIndex = trackList.findIndex(t =>
     t.disc === cur.disc && t.index === cur.index - 1
   );
@@ -292,13 +292,13 @@ prevBtn.addEventListener("click", () => {
 nextBtn.addEventListener("click", () => {
   const cur = trackList[currentIndex];
 
-  // 🔴 Disc 2 마지막 → 완전 중지
+  //  Disc 2 마지막 → 완전 중지
   if (cur.disc === 2 && cur.index === 2) {
     stopPlaybackCompletely();
     return;
   }
 
-  // 🟣 Disc 1 마지막 → Disc 2 첫 곡
+  //  Disc 1 마지막 → Disc 2 첫 곡
   if (cur.disc === 1 && cur.index === 2) {
     setDiscUI(2);
 
@@ -309,7 +309,7 @@ nextBtn.addEventListener("click", () => {
     return;
   }
 
-  // 🟢 같은 Disc 다음 곡
+  //  같은 Disc 다음 곡
   const nextIndex = trackList.findIndex(t =>
     t.disc === cur.disc && t.index === cur.index + 1
   );
@@ -335,19 +335,19 @@ function formatTime(sec) {
 audio.addEventListener("ended", () => {
   const cur = trackList[currentIndex];
 
-  // 🔴 Disc 2 마지막 곡 → 완전 중단
+  // Disc 2 마지막 곡 → 완전 중단
   if (cur.disc === 2 && cur.index === 2) {
     stopPlaybackCompletely();
     return;
   }
 
-  // 🟣 Disc 1 마지막 곡 → Disc 2 첫 곡
+  // Disc 1 마지막 곡 → Disc 2 첫 곡
   if (cur.disc === 1 && cur.index === 2) {
     switchToDisc2AndPlay();
     return;
   }
 
-  // 🟢 그 외 → 같은 Disc의 다음 곡
+  // 그 외 → 같은 Disc의 다음 곡
   const nextIndex = trackList.findIndex(t =>
     t.disc === cur.disc && t.index === cur.index + 1
   );
@@ -424,7 +424,7 @@ seekBar.addEventListener("input", () => {
 
 
 // ----------------------------------------------------
-// 3. HCU 스타일 입자 효과 (bgCanvas)
+// 3. 입자 효과 (bgCanvas)
 // ----------------------------------------------------
 const canvas = document.getElementById("bgCanvas");
 const ctx = canvas.getContext("2d");
@@ -513,7 +513,7 @@ const bg = new Image();
 bg.src = "assets/circle.jpg";
 
 const depthImg = new Image();
-depthImg.src = "assets/circle_depth.png";   // 네가 준 depth-map
+depthImg.src = "assets/circle_depth.png";  
 
 const renderCanvas = document.createElement("canvas");
 const rctx = renderCanvas.getContext("2d");
@@ -673,27 +673,27 @@ function startDepthParallax() {
 const comments = {
   0: {
     title: "Solenyx - Tonarui",
-    body: "정통 트랜스입니다. 앨범 취지에 맞게 주력으로 항상 만들던거라 어렵지 않게 완성은 했는데 듣기 지루하지 않을까 라는 생각이 듭니다. 다음엔 요즘 시대에 맞는 하이퍼트랜스라던가 재밌는 걸 주력으로 만들어 보겠습니다. 여러모로 아쉽지만 좋은 밑거름이 될 거 같네요! "
+    body: "정통 트랜스?에 가까운 느낌입니다. 앨범 취지에 맞게 주력으로 항상 만들던거라 어렵지 않게 완성은 했는데 듣기 지루하지 않을까 라는 생각이 듭니다.  다음엔 요즘 시대에 맞는 하이퍼트랜스라던가 재밌는 걸 주력으로 만들어 보겠습니다. 여러모로 아쉽지만 좋은 밑거름이 될 거 같네요! "
   },
   1: {
-    title: "읔브",
-    body: "테스트"
+    title: "Revolve -  lisiko",
+    body: "사실 장르 생각을 하지 않은채로 늘 쓰던 스타일로 썼어요. 사실 원래 쓰던 스타일이랑은 약간 다르긴 한데 듣는 데에는 대략 비슷하겠거니 싶고"
   },
   2: {
     title: "pluto - prsgt",
-    body: "심플한 트랜스입니다. 많은 고민을 거치지 않은 것 치고는 꽤 마음에 들지도? 다만 다음번엔 더 많은 고민을 해 보는 걸로… 명왕성은 혼자 동떨어져 있다는 느낌이 있죠. 슬플 것 같네요. 제가 명왕성이라면 그냥 지구에 돌진해서 소멸했습니다. "
+    body: "심플한 트랜스입니다. 많은 고민을 거치지 않은 것 치고는 꽤 마음에 들지도? 다만 다음번엔 더 많은 고민을 해 보는 걸로... 명왕성은 혼자 동떨어져 있다는 느낌이 있죠. 슬플 것 같네요. 제가 명왕성이라면 그냥 지구에 돌진해서 소멸했습니다. "
   },
   3: {
     title: "Open Portal - Tonarui",
     body: "처음으로 완곡해서 만들어본 하이테크에요! 앨범 이미지를 항상 생각해서 난잡하고 하이테크 특유의 재밌는 느낌을 많이 주려고 했어요. Output 사의 Portal도 사용해서 재미를 좀 봤습니다.(비싸다) 재밌게 들어주세요!"
   },
   4: {
-    title: "Alertavoid - 읔브",
-    body: "코멘트2"
+    title: "Alertavoid - lisiko",
+    body: "곡내림이 영원히 안와서 2025년과 전혀 관계없는 곡이 나왔어요"
   },
   5: {
     title: "ujumia - prsgt",
-    body: "테크노입니다. 좋아하는 테크노들의 특징을 담아 최대한 멜로디를 배제하기도 하고, 미묘한 코드 진행을 하기도 했습니다… 만 어째선지 기묘한 곡이 되어버렸네요. 우주에서 부조리한 이유로 길을 잃은 느낌을 표현하고 싶었습니다. 우주미아네요. 모쪼록 잘 부탁드립니다. "
+    body: "테크노입니다. 좋아하는 테크노들의 특징을 담아 최대한 멜로디를 배제하기도 하고, 미묘한 코드 진행을 하기도 했습니다... 만 어째선지 기묘한 곡이 되어버렸네요. 우주에서 부조리한 이유로 길을 잃은 느낌을 표현하고 싶었습니다. 우주미아네요. 모쪼록 잘 부탁드립니다. "
   }
 };
 
@@ -832,7 +832,7 @@ viewport.addEventListener("touchend", () => {
 
 
 // ================================
-// EDGE SHARD SYSTEM (HCU STYLE)
+// EDGE SHARD SYSTEM 
 // ================================
 const shardCanvas = document.getElementById("cornerFxCanvas");
 const sctx = shardCanvas.getContext("2d");

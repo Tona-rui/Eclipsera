@@ -230,77 +230,78 @@ body {
   color: #fff;
   opacity: .9;
 }
-.download-btn {
+.bandcamp-icon-btn {
+  width: 68px;
+  height: 68px;
+  margin-top: 28px;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
 
-  margin-top: 32px;
-  padding: 18px 48px;
-
-  font-size: 20px;
-  font-weight: 600;
+  border-radius: 50%;
   text-decoration: none;
-  letter-spacing: 0.7px;
 
-  color: #e8ebff;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.3);
 
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 18px;
-
-  backdrop-filter: blur(22px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
   box-shadow:
-    0 8px 28px rgba(0,0,0,0.55),
-    0 0 35px rgba(150, 90, 255, 0.55),
-    inset 0 0 14px rgba(255,255,255,0.08);
+    0 10px 28px rgba(0,0,0,0.55),
+    0 0 40px rgba(160,120,255,0.6),
+    inset 0 0 14px rgba(255,255,255,0.1);
 
-  transition: 0.28s ease;
+  transition: 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
-/* 내부 그라데이션 빛 */
-.download-btn::before {
+/* 내부 은은한 빛 */
+.bandcamp-icon-btn::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(150, 90, 255, 0.25),
-    rgba(90, 200, 255, 0.25)
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255,255,255,0.35),
+    transparent 60%
   );
   opacity: 0;
   transition: 0.3s;
 }
 
-/* Hover 상태 */
-.download-btn:hover {
-  border-color: rgba(255, 255, 255, 0.55);
-  transform: translateY(-4px);
+/* hover */
+.bandcamp-icon-btn:hover {
+  transform: translateY(-4px) scale(1.05);
   box-shadow:
-    0 14px 36px rgba(0,0,0,0.65),
-    0 0 50px rgba(150, 90, 255, 0.95),
-    inset 0 0 18px rgba(255,255,255,0.15);
+    0 16px 38px rgba(0,0,0,0.65),
+    0 0 55px rgba(180,140,255,0.95),
+    inset 0 0 18px rgba(255,255,255,0.18);
 }
 
-.download-btn:hover::before {
+.bandcamp-icon-btn:hover::before {
   opacity: 1;
 }
 
-/* 클릭 */
-.download-btn:active {
-  transform: scale(0.97);
+.bandcamp-icon-btn:active {
+  transform: scale(0.95);
 }
 
-.dl-icon {
-  width: 22px;
-  height: 22px;
-  position: relative;
-  display: inline-block;
-  margin-right: 10px;
+.bc-icon {
+  width: 30px;
+  height: 30px;
+
+  background: currentColor;
+  color: #ffffff;
+
+  mask: url("assets/icons/bandcamp.svg") no-repeat center;
+  -webkit-mask: url("assets/icons/bandcamp.svg") no-repeat center;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+
+  opacity: 0.9;
 }
+
 
 /* 화살표 기둥 */
 .dl-icon::before {
@@ -971,10 +972,13 @@ body {
     0 1px 2px rgba(0,0,0,0.35),
     0 0 6px rgba(255,255,255,0.35);
 }
+/* 링크 */
+.credit-item a:first-of-type {
+  margin-left: auto;
+}
 
 /* X 링크 */
 .x-link {
-  margin-left: auto;
   display: inline-flex;
   align-items: center;
   opacity: 0.65;
@@ -999,15 +1003,69 @@ body {
   -webkit-mask-size: contain;
 }
 
-
-
-/* Special Thanks */
-.credit-note {
-  margin-top: 6px;
-  opacity: 0.85;
-  font-size: 17px;
-  color: #fff;
+/* SoundCloud 링크 */
+.sc-link {
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.65;
+  color: #ff7a18;
+  transition: 0.25s;
+  transform: translateY(1px);
 }
+
+.sc-link:hover {
+  opacity: 1;
+  transform: scale(1.13);
+}
+
+.sc-link::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: currentColor;
+  mask: url("assets/icons/sc-logo.svg") no-repeat center;
+  -webkit-mask: url("assets/icons/sc-logo.svg") no-repeat center;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+}
+
+/* YouTube 링크 */
+.yt-link {
+  margin-left: 10px;
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.65;
+  color: #ff0000;
+  transition: 0.25s;
+  transform: translateY(1px);
+}
+
+.yt-link:hover {
+  opacity: 1;
+  transform: scale(1.13);
+}
+
+.yt-link::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: currentColor;
+  mask: url("assets/icons/youtube.svg") no-repeat center;
+  -webkit-mask: url("assets/icons/youtube.svg") no-repeat center;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+}
+
+.x-link,
+.sc-link,
+.yt-link {
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.65;
+  transition: 0.25s;
+  transform: translateY(1px);
+}
+
 
 .disc-description {
   margin-top: 12px;
