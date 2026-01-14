@@ -104,7 +104,7 @@ body {
     radial-gradient(at 80% 20%, rgba(255,190,120,0.28), transparent 60%),
     radial-gradient(at 10% 80%, rgba(150,80,255,0.30), transparent 50%),
     linear-gradient(110deg, rgba(5,0,20,0.85), rgba(255,240,240,0.55)),
-    url("assets/circle.jpg");
+    url("./assets/circle.jpg");
 
   background-size: 160%;
   background-blend-mode: soft-light, soft-light, normal;
@@ -853,10 +853,10 @@ body {
   z-index: -2;
 }
 
-.noise-layer { background: url('assets/noise.png'); opacity: .12; }
+.noise-layer { background: url('./assets/noise.png'); opacity: .12; }
 .bloom-layer { background: radial-gradient(circle, rgba(255,200,150,0.25), transparent 60%); filter: blur(70px); }
 .blur-mask { backdrop-filter: blur(18px); }
-.mist-layer { background: url("assets/mist.png"); opacity:.12; filter:blur(12px); }
+.mist-layer { background: url("./assets/mist.png"); opacity:.12; filter:blur(12px); }
 
 .particle-layer {
   position: fixed;
