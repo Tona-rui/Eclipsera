@@ -158,7 +158,7 @@ function playTrack(i) {
   currentIndex = i;
   const track = trackList[i];
 
-  audio.src = "assets/" + track.file;
+  audio.src = "./assets/" + track.file;
   audio.volume = 0;
   audio.play();
   fadeAudio(targetVolume, FADE_IN_TIME);
@@ -243,14 +243,14 @@ function updateVolumeIcon(volume) {
   const icon = document.querySelector(".volume-icon");
 
   if (volume === 0) {
-    icon.style.maskImage = "url('assets/icons/volume-off.svg')";
-    icon.style.webkitMaskImage = "url('assets/icons/volume-off.svg')";
+    icon.style.maskImage = "url('./assets/icons/volume-off.svg')";
+    icon.style.webkitMaskImage = "url('./assets/icons/volume-off.svg')";
   } else if (volume < 0.7) {
-    icon.style.maskImage = "url('assets/icons/volume-mid.svg')";
-    icon.style.webkitMaskImage = "url('assets/icons/volume-mid.svg')";
+    icon.style.maskImage = "url('./assets/icons/volume-mid.svg')";
+    icon.style.webkitMaskImage = "url('./assets/icons/volume-mid.svg')";
   } else {
-    icon.style.maskImage = "url('assets/icons/volume-max.svg')";
-    icon.style.webkitMaskImage = "url('assets/icons/volume-max.svg')";
+    icon.style.maskImage = "url('./assets/icons/volume-max.svg')";
+    icon.style.webkitMaskImage = "url('./assets/icons/volume-max.svg')";
   }
 }
 
@@ -510,10 +510,10 @@ window.addEventListener("scroll", () => {
 --------------------------------------------------------- */
 
 const bg = new Image();
-bg.src = "assets/circle.jpg";
+bg.src = "./assets/circle.jpg";
 
 const depthImg = new Image();
-depthImg.src = "assets/circle_depth.png";  
+depthImg.src = "./assets/circle_depth.png";  
 
 const renderCanvas = document.createElement("canvas");
 const rctx = renderCanvas.getContext("2d");
