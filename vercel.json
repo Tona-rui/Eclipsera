@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/eclipsera/:path*",
+      "destination": "/eclipsera/:path*"
+    },
+    {
+      "source": "/",
+      "destination": "/eclipsera/index.html"
+    }
+  ]
+}
